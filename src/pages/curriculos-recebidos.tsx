@@ -176,7 +176,7 @@ function Item2(props2){
                                 direction={'row'}
                             >
                                 <Button
-                                    onClick={() => router.push('/vaga-ux')}
+                                    onClick={() => router.push('/enviar-atividade')}
                                     flex={1}
                                     fontSize={'sm'}
                                     bg={'yellowPrimary.800'}
@@ -190,7 +190,7 @@ function Item2(props2){
                                     _focus={{
                                         bg: 'yellowPrimary.500',
                                     }}>
-                                    Ver Curriculo
+                                    Enviar Atividade
                                 </Button>
                             </Stack>
                         </Stack>
