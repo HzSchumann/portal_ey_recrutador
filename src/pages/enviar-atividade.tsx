@@ -13,19 +13,8 @@ import db from '../config/firebase';
 export default function EnviarAtividade() {
     const router = useRouter();
 
-    async function adicionarProposta(){
-
-        const docData = {
-            descricao: document.getElementById("descricao").value,
-            comoUsamosEy: document.getElementById("comoUsamosEy").value,
-            name: document.getElementById("name").value,
-            requisitos: document.getElementById("requisitos").value,
-            nivel: document.getElementById("nivel").value 
-        };
-
-        await setDoc(doc(db, "Vagas", `Vaga de ${document.getElementById("name").value}`), docData);
-        router.push('/vagas-abertas');
-    }
+    const nameU = new URLSearchParams(window.location.search).get("name");
+    const idpu = new URLSearchParams(window.location.search).get("idproposta");
 
     return (
 
@@ -60,7 +49,7 @@ export default function EnviarAtividade() {
                                         }}
                                         _focus={{
                                             bg: 'yellowPrimary.500',
-                                        }} onClick={() => adicionarProposta()}>Enviar</Button>
+                                        }} onClick={() => router.push("/entrevista-rh?idproposta=" + idpu + '&name=' + nameU)}>Enviar</Button>
                 </Center>
 
             </Stack>

@@ -6,7 +6,7 @@ import { LogedHeader } from "../components/logedHeader/index";
 import CardProposta from "../components/Notificacoes/cardProposta";
 import CardVizualizou from "../components/Notificacoes/cardVizualizou";
 import { useRouter } from 'next/router';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, deleteDoc } from "firebase/firestore";
 import db from '../config/firebase';
 
 
@@ -14,18 +14,41 @@ export default function EntrevistaRH() {
     const router = useRouter();
     const { isOpen, onOpen, onClose} = useDisclosure()
 
+    const idU = new URLSearchParams(window.location.search).get("idproposta") 
+
     async function adicionarProposta(){
 
         const docData = {
-            descricao: document.getElementById("descricao").value,
-            comoUsamosEy: document.getElementById("comoUsamosEy").value,
-            name: document.getElementById("name").value,
-            requisitos: document.getElementById("requisitos").value,
-            nivel: document.getElementById("nivel").value 
+            name: new URLSearchParams(window.location.search).get("name")
         };
 
-        await setDoc(doc(db, "Vagas", `Vaga de ${document.getElementById("name").value}`), docData);
-        router.push('/vagas-abertas');
+        await setDoc(doc(db, "CandidatosContratados", `Vaga de ${new URLSearchParams(window.location.search).get("name")}`), docData);
+
+        const docRef = doc(db, "CurriculosAprovados", idU);
+
+        deleteDoc(docRef)
+            .then(() => {
+                console.log("Entire Document has been deleted successfully.")
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            router.push('/curriculos-recebidos');
+    }
+    
+
+    async function removerProposta(){
+
+        const docRef = doc(db, "CurriculosAprovados", idU);
+
+        deleteDoc(docRef)
+            .then(() => {
+                console.log("Entire Document has been deleted successfully.")
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            router.push('/curriculos-recebidos');
     }
 
     return (
@@ -151,7 +174,7 @@ export default function EntrevistaRH() {
 
                         </ModalBody>
                         <ModalFooter>
-                            <Button onClick={() => router.push('/curriculos-recebidos')} bg={'yellowPrimary.800'}
+                            <Button onClick={() => removerProposta()} bg={'yellowPrimary.800'}
                                 color={'black'}
                                 boxShadow={
                                     '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'

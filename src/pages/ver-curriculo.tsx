@@ -46,6 +46,20 @@ export default function VerCurriculo() {
             })
             router.push('/curriculos-recebidos');
     }
+
+    async function removerProposta(){
+
+        const docRef = doc(db, "Curriculos", idpu);
+
+        deleteDoc(docRef)
+            .then(() => {
+                console.log("Entire Document has been deleted successfully.")
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            router.push('/curriculos-recebidos');
+    }
 //router.push('/minhas-vagas');
     
 
@@ -185,7 +199,7 @@ export default function VerCurriculo() {
 
                         </ModalBody>
                         <ModalFooter>
-                            <Button onClick={() => router.push('/curriculos-recebidos')} bg={'yellowPrimary.800'}
+                            <Button onClick={() => removerProposta()} bg={'yellowPrimary.800'}
                                 color={'black'}
                                 boxShadow={
                                     '0px 1px 25px -5px rgb(247 244 30 / 48%), 0 10px 10px -5px rgb(247 244 30 / 43%)'

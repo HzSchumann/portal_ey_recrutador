@@ -12,6 +12,8 @@ import {
 import router from 'next/router';
 
 export default function VagaPMO() {
+    const nomeU = new URLSearchParams(window.location.search).get("name");
+
     return (
 
         <>
@@ -21,7 +23,7 @@ export default function VagaPMO() {
 
                 <Center mt="2rem" mb="2rem">
                     <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem">
-                        <Heading color="White">Henzo Schumann Barbosa</Heading>
+                        <Heading color="White">{nomeU}</Heading>
                     </Box >
                 </Center>
 
