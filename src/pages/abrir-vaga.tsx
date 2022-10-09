@@ -5,9 +5,28 @@ import router from "../../node_modules/next/router";
 import { LogedHeader } from "../components/logedHeader/index";
 import CardProposta from "../components/Notificacoes/cardProposta";
 import CardVizualizou from "../components/Notificacoes/cardVizualizou";
+import { useRouter } from 'next/router';
+import { doc, setDoc } from "firebase/firestore";
+import db from '../config/firebase';
 
 
 export default function MinhasVagas() {
+    const router = useRouter();
+
+    async function adicionarProposta(){
+
+        const docData = {
+            descricao: document.getElementById("descricao").value,
+            comoUsamosEy: document.getElementById("comoUsamosEy").value,
+            name: document.getElementById("name").value,
+            requisitos: document.getElementById("requisitos").value,
+            nivel: document.getElementById("nivel").value 
+        };
+
+        await setDoc(doc(db, "Vagas", `Vaga de ${document.getElementById("name").value}`), docData);
+        router.push('/vagas-abertas');
+    }
+
     return (
 
         <>
@@ -24,35 +43,35 @@ export default function MinhasVagas() {
                 <Center>
                     <FormControl w="60%">
                         <FormLabel color="white">Nome da Vaga: </FormLabel>
-                        <Input type='text' color="white"/>
+                        <Input type='text' id="name" color="white"/>
                     </FormControl>
                 </Center>
 
                 <Center>
                     <FormControl w="60%">
                         <FormLabel color="white">Nível da Vaga: </FormLabel>
-                        <Input type='text' color="white"/>
+                        <Input type='text' id="nivel" color="white"/>
                     </FormControl>
                 </Center>
 
                 <Center>
                     <FormControl w="60%">
                         <FormLabel color="white">Descrição da Vaga: </FormLabel>
-                        <Textarea color="white"/>
+                        <Textarea id="descricao" color="white"/>
                     </FormControl>
                 </Center>
 
                 <Center>
                     <FormControl w="60%">
                         <FormLabel color="white">Como Usamos na EY: </FormLabel>
-                        <Textarea color="white"/>
+                        <Textarea id="comoUsamosEy" color="white"/>
                     </FormControl>
                 </Center>
 
                 <Center>
                     <FormControl w="60%">
                         <FormLabel color="white">Requisitos da Vaga: </FormLabel>
-                        <Textarea color="white"/>
+                        <Textarea id="requisitos" color="white"/>
                     </FormControl>
                 </Center>
 
@@ -67,7 +86,7 @@ export default function MinhasVagas() {
                                         }}
                                         _focus={{
                                             bg: 'yellowPrimary.500',
-                                        }} onClick={() => router.push('/vagas-abertas')}>Adicionar Vaga</Button>
+                                        }} onClick={() => adicionarProposta()}>Adicionar Vaga</Button>
                 </Center>
 
             </Stack>

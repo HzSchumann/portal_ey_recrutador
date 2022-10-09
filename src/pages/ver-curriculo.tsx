@@ -10,9 +10,45 @@ import {
     Button,
 } from '@chakra-ui/react';
 import router from 'next/router';
+import { doc, setDoc, deleteDoc } from "firebase/firestore";
+import db from "../config/firebase";
 
 export default function VerCurriculo() {
     const { isOpen, onOpen, onClose} = useDisclosure()
+
+    const nomeU = new URLSearchParams(window.location.search).get("name");
+    const areaU = new URLSearchParams(window.location.search).get("area");
+    const cursosU = new URLSearchParams(window.location.search).get("cursos");
+    const experienciaU = new URLSearchParams(window.location.search).get("experiencia");
+    const graduacaoU = new URLSearchParams(window.location.search).get("graduacao");
+    const idpu = new URLSearchParams(window.location.search).get("idproposta") 
+  
+    async function adicionarProposta(){
+
+        const docData = {
+            area: new URLSearchParams(window.location.search).get("area"),
+            graduacao: new URLSearchParams(window.location.search).get("graduacao"),
+            name:  new URLSearchParams(window.location.search).get("name"),
+            experiencia: new URLSearchParams(window.location.search).get("experiencia"),
+            estado: new URLSearchParams(window.location.search).get("estado")
+        };
+
+        await setDoc(doc(db, "CurriculosAprovados", `Curriculo de ${new URLSearchParams(window.location.search).get("name")}`), docData);
+
+        const docRef = doc(db, "Curriculos", idpu);
+
+        deleteDoc(docRef)
+            .then(() => {
+                console.log("Entire Document has been deleted successfully.")
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            router.push('/curriculos-recebidos');
+    }
+//router.push('/minhas-vagas');
+    
+
     return (
 
         <>
@@ -22,7 +58,7 @@ export default function VerCurriculo() {
 
                 <Center mt="2rem" mb="2rem">
                     <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem">
-                        <Heading color="White">Henzo Schumann Barbosa</Heading>
+                        <Heading color="White">{nomeU}</Heading>
                     </Box >
                 </Center>
 
@@ -35,7 +71,7 @@ export default function VerCurriculo() {
                 <Center mt="2rem" mb="2rem">
                 <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem" mb="3rem">
                     <Text color="white">
-                        Desenvolvedor Front-End
+                        {areaU}
                     </Text>
                     </Box >
                 </Center>
@@ -49,7 +85,7 @@ export default function VerCurriculo() {
                 <Center mt="2rem" mb="2rem">
                 <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem" mb="3rem">
                     <Text color="white">
-                        Sistemas de Informação FIAP
+                        {graduacaoU}
                     </Text>
                     </Box >
                 </Center>
@@ -63,7 +99,7 @@ export default function VerCurriculo() {
                 <Center mt="2rem" mb="2rem">
                 <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem" mb="3rem">
                     <Text color="white">
-                        Desenvolvedor Front-End - IBM
+                        {experienciaU}
                     </Text>
                     </Box >
                 </Center>
@@ -77,10 +113,7 @@ export default function VerCurriculo() {
                 <Center mt="2rem" mb="2rem">
                 <Box w="60%" mr="4" rounded='md' text-align='center' ml="2rem" mb="3rem">
                     <Text color="white">
-                        Front-end Journey - FIAP
-                    </Text>
-                    <Text color="white">
-                        Lógica de Programação - Senac
+                        {cursosU}
                     </Text>
                     </Box >
                 </Center>
@@ -92,7 +125,7 @@ export default function VerCurriculo() {
                         <Flex>
 
                     <Button
-                                        onClick={() => router.push('/minhas-vagas')}
+                                        onClick={() => adicionarProposta()}
                                         mr="3rem"
                                         w="80%"
                                         flex={1}
