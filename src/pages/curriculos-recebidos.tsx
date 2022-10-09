@@ -280,7 +280,7 @@ function Item3(props3){
                                     _focus={{
                                         bg: 'yellowPrimary.500',
                                     }}>
-                                    Mostar informações
+                                    Mostar Informações
                                 </Button>
                             </Stack>
                         </Stack>

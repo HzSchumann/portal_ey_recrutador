@@ -45,9 +45,9 @@ export function LogedHeader() {
                         
                     </HStack>
 
-                    <Flex alignItems={'center'}>
+                    {/* <Flex alignItems={'center'}> */}
                             {/* <Input w="600px" variant='filled' placeholder='Buscar' /> */}
-                            <InputGroup size='md'>
+                            {/* <InputGroup size='md'>
                                 <Input
                                     bg='gray.700'
                                     pr='4.5rem'
@@ -59,7 +59,7 @@ export function LogedHeader() {
                                     <Button bg='gray.600' leftIcon={<Search2Icon />} h='1.75rem' size='sm' onClick={() => router.push('/cursos')}></Button>
                                 </InputRightElement>
                             </InputGroup>
-                    </Flex>
+                    </Flex> */}
 
                     <Flex alignItems={'center'}>
                         <IconButton
@@ -72,22 +72,13 @@ export function LogedHeader() {
                             <Icon as={AiOutlineHome} color="white"></Icon>
                         </IconButton>
 
-                        <IconButton
-                            bg="gray.700"
-                            size={'lg'}
-                            mr='1rem'
-                            aria-label={'Meus Cursos'}
-                            onClick={() => router.push('/meus_cursos')}
-                        >
-                            <Icon as={AiOutlinePlayCircle} color="white"></Icon>
-                        </IconButton>
-
+            
                         <IconButton
                             bg="gray.700"
                             size={'lg'}
                             mr='1rem'
                             aria-label={'Notificações'}
-                            onClick={() => router.push('/minhas-vagas')}
+                            onClick={() => router.push('/vagas-abertas')}
                         >
                             <Icon as={AiOutlineFileText} color="white"></Icon>
                         </IconButton>
@@ -103,7 +94,7 @@ export function LogedHeader() {
                                     mr="1rem"
                                     size={'sm'}
                                     src={
-                                        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80'
+                                        'https://images.unsplash.com/photo-1549351512-c5e12b11e283?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80'
                                     }
                                 />
                             </MenuButton>
@@ -112,11 +103,6 @@ export function LogedHeader() {
                                     onClick={() => router.push('/perfil')}
                                 >
                                     Configurações
-                                </MenuItem>
-                                <MenuItem
-                                    onClick={() => router.push('/assinatura')}
-                                >
-                                    Assinatura
                                 </MenuItem>
                                 <MenuDivider />
                                 <MenuItem onClick={() => router.push('/')}>Sair</MenuItem>
