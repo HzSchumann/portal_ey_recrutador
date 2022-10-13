@@ -19,7 +19,8 @@ export default function EntrevistaRH() {
     async function adicionarProposta(){
 
         const docData = {
-            name: new URLSearchParams(window.location.search).get("name")
+            name: new URLSearchParams(window.location.search).get("name"),
+            area: new URLSearchParams(window.location.search).get("area")
         };
 
         await setDoc(doc(db, "CandidatosContratados", `Vaga de ${new URLSearchParams(window.location.search).get("name")}`), docData);

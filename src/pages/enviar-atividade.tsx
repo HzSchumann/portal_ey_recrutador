@@ -14,6 +14,7 @@ export default function EnviarAtividade() {
     const router = useRouter();
 
     const nameU = new URLSearchParams(window.location.search).get("name");
+    const areaU = new URLSearchParams(window.location.search).get("area");
     const idpu = new URLSearchParams(window.location.search).get("idproposta");
 
     return (
@@ -49,7 +50,7 @@ export default function EnviarAtividade() {
                                         }}
                                         _focus={{
                                             bg: 'yellowPrimary.500',
-                                        }} onClick={() => router.push("/entrevista-rh?idproposta=" + idpu + '&name=' + nameU)}>Enviar</Button>
+                                        }} onClick={() => router.push("/entrevista-rh?idproposta=" + idpu + '&name=' + nameU + '&area' + areaU)}>Enviar</Button>
                 </Center>
 
             </Stack>

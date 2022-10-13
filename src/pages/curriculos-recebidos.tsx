@@ -115,7 +115,7 @@ export default function CurriculosRecebidos() {
                                 <Text
                                     textAlign={'left'}
                                     color={useColorModeValue('white', 'gray.400')}>
-                                    {props.proposta.estado}
+                                    {props.proposta.area}
                                 </Text>
                             </Stack>
                             <Stack
@@ -152,7 +152,7 @@ export default function CurriculosRecebidos() {
                 </Center>
 
 
-	)
+    )
 }
 
 function Item2(props2){
@@ -184,7 +184,7 @@ function Item2(props2){
                             <Text
                                 textAlign={'left'}
                                 color={useColorModeValue('white', 'gray.400')}>
-                                {props2.proposta2.estado}
+                                {props2.proposta2.area}
                             </Text>
                         </Stack>
                         <Stack
@@ -198,7 +198,7 @@ function Item2(props2){
                                 direction={'row'}
                             >
                                 <Button
-                                    onClick={() => router.push('/enviar-atividade?idproposta=' + props2.proposta2.id + '&name=' + props2.proposta2.name)}
+                                    onClick={() => router.push('/enviar-atividade?idproposta=' + props2.proposta2.id + '&name=' + props2.proposta2.name + '&area=' + props2.proposta2.area)}
                                     flex={1}
                                     fontSize={'sm'}
                                     bg={'yellowPrimary.800'}
@@ -252,6 +252,7 @@ function Item3(props3){
                             <Text
                                 textAlign={'left'}
                                 color={useColorModeValue('white', 'gray.400')}>
+                            {props3.proposta3.area}
                                 
                             </Text>
                         </Stack>
